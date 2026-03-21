@@ -21,3 +21,18 @@ wav = model.generate(descriptions)
 
 import torchaudio
 torchaudio.save("output.wav", wav[0].cpu(), 32000)
+
+**********************************************************************
+1. 한 번에 3개 뽑기
+descriptions = [
+    "bossa nova track with a dominant melodic theme, acoustic guitar lead carrying a clear and catchy melody, emotional progression, jazz harmony supporting the melody, soft groove, musical storytelling, non-repetitive structure"
+]
+
+model.set_generation_params(duration=20, temperature=1.1)
+
+wav = model.generate(descriptions * 3)
+
+👉 핵심:
+
+* 3 → 3개 생성
+temperature 1.1 → 멜로디 다양성 증가
