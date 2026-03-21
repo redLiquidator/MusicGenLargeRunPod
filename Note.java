@@ -33,6 +33,7 @@ wav = model.generate(descriptions * 3)
 
 👉 핵심: * 3 → 3개 생성, temperature 1.1 → 멜로디 다양성 증가
 **********************************************************************
+<Mar22>
 <Network Volume>  
 기본 설치는 보통 pod의 임시 컨테이너 쪽에 들어가서 terminate 하면 같이 날아간다.
 그런데 /workspace가 network volume에 연결되어 있으면,
