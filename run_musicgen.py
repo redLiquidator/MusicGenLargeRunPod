@@ -15,8 +15,10 @@ descriptions = [
 
 wav = model.generate(descriptions)
 
-# ===== save =====
+# ===== save ===== 
 output_path = "/workspace/output.wav"
 torchaudio.save(output_path, wav[0].cpu(), 32000)
 
 print("Saved:", output_path)
+
+# ===== run ====== !python /workspace/run_musicgen.py
