@@ -1,0 +1,37 @@
+from audiocraft.models import MusicGen
+import torchaudio
+import torch
+from datetime import datetime
+
+# 🔥 seed 고정 (완벽하진 않지만 도움됨)
+torch.manual_seed(42)
+
+model = MusicGen.get_pretrained("facebook/musicgen-large")
+
+# 🔥 길이 60초
+model.set_generation_params(
+    duration=60,
+    temperature=0.72,
+    top_k=200,
+    top_p=0.9
+)
+
+descriptions = [
+    "bossa nova, nylon acoustic guitar lead, warm cafe atmosphere, "
+    "clear melodic motif introduced at the beginning, soft and simple intro, "
+    "melody gradually develops with richer phrasing and rhythm, "
+    "main section with strong expressive melody and groove, "
+    "variation of the melody with slight changes and emotional lift, "
+    "smooth and natural progression, continuous flow, "
+    "gentle resolution with fading melodic idea, no abrupt ending, "
+    "cohesive musical story, human expressive timing"
+]
+
+wav = model.generate(descriptions)
+
+timestamp = datetime.now().strftime("%H%M%S")
+output_path = f"/workspace/bossa_1min_{timestamp}.wav"
+
+torchaudio.save(output_path, wav[0].cpu(), 32000)
+
+print("Saved:", output_path)
